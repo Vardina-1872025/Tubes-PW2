@@ -95,7 +95,15 @@ if(!isset($_SESSION['isLoggedIn'])){
                         </div>
                     </div>
 				<?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='pegawai'){?>
-					<li><a href="?navito=#">Transaksi</a></li>
+					<div class="dropdown">
+                        <button class="dropbtn">Transaksi
+                        <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="?navito=transaksi">Input Data Transaksi</a>
+                        <a href="#">View Data Transaksi</a>
+                        </div>
+                    </div> 
                 <?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='member'){?>
 					<div class="dropdown">
                         <button class="dropbtn">Data Kendaraan 
