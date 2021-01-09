@@ -12,6 +12,7 @@ include_once 'controller/ownerLoginController.php';
 include_once 'controller/ownerController.php';
 include_once 'controller/pegawaiController.php';
 include_once 'controller/pegawaiView.php';
+include_once 'controller/memberView.php';
 include_once 'controller/memberController.php';
 include_once 'controller/artistsController.php';
 include_once 'controller/albumsController.php';
@@ -108,6 +109,15 @@ if(!isset($_SESSION['isLoggedIn'])){
                         <a href="?navito=viewtransaksi">View Data Transaksi</a>
                         </div>
                     </div> 
+                    <div class="dropdown">
+                        <button class="dropbtn">View Data 
+                        <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="?navito=viewmember">Member</a>
+                        <a href="#">Employee Of The Month</a>
+                        </div>
+                    </div>
                 <?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='member'){?>
 					<div class="dropdown">
                         <button class="dropbtn">Data Kendaraan 
@@ -184,6 +194,10 @@ if(!isset($_SESSION['isLoggedIn'])){
                     $pegawaiViewController = new pegawaiViewController();
                     $pegawaiViewController->index();
                     break;
+                case 'viewmember':
+                    $memberViewController = new memberViewController();
+                    $memberViewController->index();
+        
                 default:
                     {
                         if($_SESSION['isLoggedIn']){
