@@ -7,8 +7,11 @@ include_once 'entity/pegawaiLogin.php';
 include_once 'entity/pegawai.php';
 include_once 'entity/member.php';
 include_once 'entity/memberLogin.php';
+include_once 'entity/bertransaksi.php';
 include_once 'controller/ownerLoginController.php';
 include_once 'controller/ownerController.php';
+include_once 'controller/pegawaiController.php';
+include_once 'controller/pegawaiView.php';
 include_once 'controller/memberController.php';
 include_once 'controller/artistsController.php';
 include_once 'controller/albumsController.php';
@@ -21,6 +24,7 @@ include_once 'dao/loginPegawaiDaoImpl.php';
 include_once 'dao/loginMemberDaoImpl.php';
 include_once 'dao/PegawaiDaoImpl.php';
 include_once 'dao/MemberDaoImpl.php';
+include_once 'dao/TransaksiDaoImpl.php';
 include_once 'util/PDOUtil.php';
 include_once 'db_function/artists_function.php';
 include_once 'db_function/albums_function.php';
@@ -101,7 +105,7 @@ if(!isset($_SESSION['isLoggedIn'])){
                         </button>
                         <div class="dropdown-content">
                         <a href="?navito=transaksi">Input Data Transaksi</a>
-                        <a href="#">View Data Transaksi</a>
+                        <a href="?navito=viewtransaksi">View Data Transaksi</a>
                         </div>
                     </div> 
                 <?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='member'){?>
@@ -152,6 +156,10 @@ if(!isset($_SESSION['isLoggedIn'])){
                     $AlbumsController = new albumsController();
                     $AlbumsController->index();
                     break;
+                case 'transaksi':
+                    $pegawaiController = new pegawaiController();
+                    $pegawaiController->index();
+                    break;
                 case 'pegawai':
                     $ownerController = new ownerController();
                     $ownerController->index();
@@ -171,6 +179,10 @@ if(!isset($_SESSION['isLoggedIn'])){
                 case 'logout':
                     $ownerLoginController = new ownerLoginController();
                     $ownerLoginController->logout();
+                    break;
+                case 'viewtransaksi':
+                    $pegawaiViewController = new pegawaiViewController();
+                    $pegawaiViewController->index();
                     break;
                 default:
                     {
