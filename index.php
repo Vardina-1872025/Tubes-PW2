@@ -5,11 +5,8 @@ include_once 'entity/Artists.php';
 include_once 'entity/login.php';
 include_once 'entity/pegawaiLogin.php';
 include_once 'entity/pegawai.php';
-include_once 'entity/member.php';
-include_once 'entity/memberLogin.php';
 include_once 'controller/ownerLoginController.php';
 include_once 'controller/ownerController.php';
-include_once 'controller/memberController.php';
 include_once 'controller/artistsController.php';
 include_once 'controller/albumsController.php';
 include_once 'controller/artistsUpdateController.php';
@@ -20,7 +17,6 @@ include_once 'dao/loginDaoImpl.php';
 include_once 'dao/loginPegawaiDaoImpl.php';
 include_once 'dao/loginMemberDaoImpl.php';
 include_once 'dao/PegawaiDaoImpl.php';
-include_once 'dao/MemberDaoImpl.php';
 include_once 'util/PDOUtil.php';
 include_once 'db_function/artists_function.php';
 include_once 'db_function/albums_function.php';
@@ -95,36 +91,9 @@ if(!isset($_SESSION['isLoggedIn'])){
                         </div>
                     </div>
 				<?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='pegawai'){?>
-					<div class="dropdown">
-                        <button class="dropbtn">Transaksi
-                        <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                        <a href="?navito=transaksi">Input Data Transaksi</a>
-                        <a href="#">View Data Transaksi</a>
-                        </div>
-                    </div> 
+					<li><a href="?navito=#">Transaksi</a></li>
                 <?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='member'){?>
-					<div class="dropdown">
-                        <button class="dropbtn">Data Kendaraan 
-                        <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                        <a href="?navito=kendaraan">Input Data Kendaraan</a>
-                        <a href="#">View Data Kendaraan</a>
-                        </div>
-                    </div> 
-                    <div class="dropdown">
-                        <button class="dropbtn">Rating
-                        <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                        <a href="#">Input Rating</a>
-                        </div>
-                    </div>
-                    <li><a href="?navito=#">Biodata</a></li>
-                    <li><a href="?navito=#">Reminder</a></li>
-                    <li><a href="?navito=#">Tukar Poin</a></li>
+					<li><a href="?navito=#">Lihat Poin</a></li>
 				<?php } ?>
                 <?php if($_SESSION['isLoggedIn']){ ?>
                 <li><a href="?navito=logout">Logout</a></li>
@@ -155,10 +124,6 @@ if(!isset($_SESSION['isLoggedIn'])){
                 case 'pegawai':
                     $ownerController = new ownerController();
                     $ownerController->index();
-                    break;
-                case 'kendaraan':
-                    $memberController = new memberController();
-                    $memberController->index();
                     break;
                 case 'artu':
                     $ArtistsUpdateController = new artistsUpdateController();
