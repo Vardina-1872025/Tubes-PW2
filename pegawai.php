@@ -53,7 +53,7 @@
     </thead>
     <tbody>
     <?php
-        /* @var artists Artists */
+        /* @var $row pegawai */
         foreach($result as $row) {
             echo '<tr>';
             echo '<td>' . $row->getId_pegawai() . '</td>';

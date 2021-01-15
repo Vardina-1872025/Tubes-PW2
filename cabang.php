@@ -33,7 +33,7 @@
 						/* @var $row2 Owner*/
 						foreach($allOwner as $row2) {
 					?>
-					<option value="<?php echo $row2->getId_owner(); ?>"><?php echo $row2->getName(); ?></option>
+					<option value="<?php echo $row2->getId_owner(); ?>"><?php echo $row2->getNama_owner(); ?></option>
 					<?php
 						}
 					?>
@@ -63,10 +63,15 @@
         /* @var $row Cabang*/
         foreach($result as $row) {
             echo '<tr>';
-            echo '<td>' . $row->getId_pegawai() . '</td>';
-            echo '<td>' . $row->getNama_pegawai() . '</td>';
-            echo '<td>' . $row->getNip() . '</td>';
             echo '<td>' . $row->getId_cabang() . '</td>';
+            echo '<td>' . $row->getNama_cabang() . '</td>';
+            echo '<td>' . $row->getAlamat() . '</td>';
+            echo '<td>' . $row->getNo_telp_cabang() . '</td>';
+			$ido = $row->getId_owner();
+			$ownObj = $this->ownerDao->fetchOwner($ido);
+			echo '<td>' . $ownObj->getNama_owner() . '</td>';
+			echo '<td><button class="btn btn--radius-2 btn--blue" onclick="updateOwner(\''.$row->getId_cabang().'\')">Update</button>
+            <button class="btn btn--radius-2 btn--blue" onclick="deleteOwner(\''.$row->getId_cabang().'\')">Delete</button></td>';
             echo '</tr>';
         }
         $link = null;

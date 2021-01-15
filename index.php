@@ -206,8 +206,8 @@ if(!isset($_SESSION['isLoggedIn'])){
                     $memberViewController->index();
 					break;
 				case 'viewpegawai':
-                    $ownerViewController = new ownerViewController();
-                    $ownerViewController->index();
+                    $ownerController = new ownerController();
+                    $ownerController->indexP();
 					break;
                 default:
                     {

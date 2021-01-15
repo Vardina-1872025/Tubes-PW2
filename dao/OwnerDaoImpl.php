@@ -19,6 +19,27 @@ class OwnerDaoImpl{
         PDOUtil::closeConnection($link);
         return $stmt->fetchObject('Owner');
     }
+	
+	public function fetchCabangData(){
+        $link = PDOUtil::createConnection();
+        $query = "SELECT * FROM cabang";
+        $result = $link->query($query);
+        $result->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Cabang');
+        PDOUtil::closeConnection($link);
+        return $result;
+    }
+	
+	public function fetchCabang($id_cabang){
+        $link = PDOUtil::createConnection();
+        $query = "SELECT * FROM cabang WHERE id_cabang = ?";
+        $stmt = $link->prepare($query);
+        $stmt->bindParam(1, $id_cabang);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
+        PDOUtil::closeConnection($link);
+        return $stmt->fetchObject('Cabang');
+    }
+	
     public function updatePegawai(Pegawai $pegawai){
         $result = 0;
         $link = PDOUtil::createConnection();

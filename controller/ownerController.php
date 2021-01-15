@@ -31,7 +31,6 @@ class ownerController{
         }
 		
         $result = $this->pegawaiDao->fetchPegawaiData();
-		$allOwner = $this->ownerDao->fetchOwnerData();
         include_once 'pegawai.php';
     }
 	
@@ -57,5 +56,13 @@ class ownerController{
                 echo '<div class="bg-error">Error add data</div>';
             }
         }
+		$result = $this->ownerDao->fetchCabangData();
+		$allOwner = $this->ownerDao->fetchOwnerData();
+		include_once 'cabang.php';
+	}
+	
+	public function indexP(){
+		$result = $this->pegawaiDao->fetchPegawaiData();
+		include_once 'view_pegawai.php';
 	}
 }
