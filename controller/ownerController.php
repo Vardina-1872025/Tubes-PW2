@@ -51,7 +51,7 @@ class ownerController{
 
             $result = $this->pegawaiDao->addPegawai($pegawai);
             if($result){
-                echo '<div class="bg-success">Data successfully added (artists: ' . $nama . ')</div>';
+                echo '<div class="bg-success">Data successfully added (Cabang: ' . $nama . ')</div>';
             } else{
                 echo '<div class="bg-error">Error add data</div>';
             }
@@ -64,5 +64,10 @@ class ownerController{
 	public function indexP(){
 		$result = $this->pegawaiDao->fetchPegawaiData();
 		include_once 'view_pegawai.php';
+	}
+	
+	public function indexB(){
+		$result = $this->ownerDao->fetchBahanBakarData();
+		include_once 'bahanbakar.php';
 	}
 }

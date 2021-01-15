@@ -40,6 +40,15 @@ class OwnerDaoImpl{
         return $stmt->fetchObject('Cabang');
     }
 	
+	public function fetchBahanBakarData(){
+        $link = PDOUtil::createConnection();
+        $query = "SELECT * FROM bahanbakar";
+        $result = $link->query($query);
+        $result->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Bahanbakar');
+        PDOUtil::closeConnection($link);
+        return $result;
+    }
+	
     public function updatePegawai(Pegawai $pegawai){
         $result = 0;
         $link = PDOUtil::createConnection();

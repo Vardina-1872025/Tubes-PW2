@@ -8,6 +8,7 @@ include_once 'entity/pegawai.php';
 include_once 'entity/cabang.php';
 include_once 'entity/owner.php';
 include_once 'entity/member.php';
+include_once 'entity/bahanbakar.php';
 include_once 'entity/memberLogin.php';
 include_once 'entity/bertransaksi.php';
 include_once 'controller/ownerLoginController.php';
@@ -184,6 +185,10 @@ if(!isset($_SESSION['isLoggedIn'])){
 				case 'cabang':
                     $ownerController = new ownerController();
                     $ownerController->indexC();
+                    break;
+				case 'bahanbakar':
+                    $ownerController = new ownerController();
+                    $ownerController->indexB();
                     break;
                 case 'artu':
                     $ArtistsUpdateController = new artistsUpdateController();

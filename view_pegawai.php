@@ -1,3 +1,4 @@
+<h2>Daftar Pegawai</h2>
 <table id="tableId" class="display">
     <thead>
     <tr>
