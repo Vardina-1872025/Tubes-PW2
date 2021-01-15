@@ -5,6 +5,8 @@ include_once 'entity/Artists.php';
 include_once 'entity/login.php';
 include_once 'entity/pegawaiLogin.php';
 include_once 'entity/pegawai.php';
+include_once 'entity/cabang.php';
+include_once 'entity/owner.php';
 include_once 'entity/member.php';
 include_once 'entity/memberLogin.php';
 include_once 'entity/bertransaksi.php';
@@ -24,6 +26,7 @@ include_once 'dao/loginDaoImpl.php';
 include_once 'dao/loginPegawaiDaoImpl.php';
 include_once 'dao/loginMemberDaoImpl.php';
 include_once 'dao/PegawaiDaoImpl.php';
+include_once 'dao/OwnerDaoImpl.php';
 include_once 'dao/MemberDaoImpl.php';
 include_once 'dao/TransaksiDaoImpl.php';
 include_once 'util/PDOUtil.php';
@@ -85,17 +88,17 @@ if(!isset($_SESSION['isLoggedIn'])){
                         <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                        <a href="?navito=pegawai">Input Data Pegawai</a>
-                        <a href="#">Input Data Cabang</a>
-                        <a href="#">View Data Pegawai</a>
+                        <a href="?navito=pegawai">Olah Data Pegawai</a>
+						<a href="?navito=viewpegawai">View Data Pegawai</a>
+                        <a href="?navito=cabang">Input Data Cabang</a>
                         </div>
                     </div> 
                     <div class="dropdown">
-                        <button class="dropbtn">Data Barang 
+                        <button class="dropbtn">Data Bahan Bakar 
                         <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                        <a href="#">Input Data Barang</a>
+                        <a href="?navito=bahanbakar">Olah Data Bahan Bakar</a>
                         <a href="#">Laporan Keuntungan</a>
                         </div>
                     </div>
@@ -178,6 +181,10 @@ if(!isset($_SESSION['isLoggedIn'])){
                     $memberController = new memberController();
                     $memberController->index();
                     break;
+				case 'cabang':
+                    $ownerController = new ownerController();
+                    $ownerController->indexC();
+                    break;
                 case 'artu':
                     $ArtistsUpdateController = new artistsUpdateController();
                     $ArtistsUpdateController->index();
@@ -197,7 +204,11 @@ if(!isset($_SESSION['isLoggedIn'])){
                 case 'viewmember':
                     $memberViewController = new memberViewController();
                     $memberViewController->index();
-        
+					break;
+				case 'viewpegawai':
+                    $ownerViewController = new ownerViewController();
+                    $ownerViewController->index();
+					break;
                 default:
                     {
                         if($_SESSION['isLoggedIn']){

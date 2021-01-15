@@ -3,38 +3,40 @@
 class ownerController{
 
     private $pegawaiDao;
+    private $ownerDao;
 
     public function __construct()
     {
         $this->pegawaiDao = new PegawaiDaoImpl;
+        $this->ownerDao = new OwnerDaoImpl;
     }
 
     public function index(){
+		//update
         $artid = filter_input(INPUT_GET, 'artid');
         if(isset($artid)){
             $pegawai = $this->pegawaiDao->fetchPegawai($artid);
         }
+		//hapus
         $command = filter_input(INPUT_GET, 'cmd');
         if(isset($command) && $command == 'del'){
-            $artid = filter_input(INPUT_GET, 'artid');
             if(isset($artid)){
-                $link = new PDO("mysql:host=localhost; dbname=tubespw2", "root", "");
-                $link->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
-                $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $query = "DELETE FROM pegawai WHERE id_pegawai = ?";
-                $stmt = $link -> prepare($query);
-                $stmt-> bindParam(1, $artid);
-                $link->beginTransaction();
-                if($stmt->execute()){
-                    $link->commit();
-                } else{
-                    $link->rollBack();
-                }
-                $link = null;
-                echo '<div class="bg-success">Data successfully deleted </div>';
+                $result = $this->ownerDao->deletePegawai($artid);
+				if ($result){
+					echo '<div class="bg-success">Data successfully deleted</div>';
+				} else {
+					echo '<div class="bg-success">An error has occured</div>';
+				}
             }
         }
-
+		
+        $result = $this->pegawaiDao->fetchPegawaiData();
+		$allOwner = $this->ownerDao->fetchOwnerData();
+        include_once 'pegawai.php';
+    }
+	
+	public function indexC(){
+		//input
         $submitPressed = filter_input(INPUT_POST, "btnSubmit");
         if(isset($submitPressed)) {
             // Get Data dari Form
@@ -55,7 +57,5 @@ class ownerController{
                 echo '<div class="bg-error">Error add data</div>';
             }
         }
-        $result = $this->pegawaiDao->fetchPegawaiData();
-        include_once 'pegawai.php';
-    }
+	}
 }
