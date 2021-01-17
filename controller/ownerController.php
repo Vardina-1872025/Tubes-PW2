@@ -4,11 +4,13 @@ class ownerController{
 
     private $pegawaiDao;
     private $ownerDao;
+	private $transaksiDao;
 
     public function __construct()
     {
-        $this->pegawaiDao = new PegawaiDaoImpl;
-        $this->ownerDao = new OwnerDaoImpl;
+        $this->pegawaiDao = new PegawaiDaoImpl();
+        $this->ownerDao = new OwnerDaoImpl();
+        $this->transaksiDao = new TransaksiDaoImpl();
     }
 
     public function index(){
@@ -182,5 +184,10 @@ class ownerController{
 		}
 		$result = $this->ownerDao->fetchBahanBakarData();
 		include_once 'update_bbm.php';
+	}
+	
+	public function indexL(){
+		$result = $this->transaksiDao->fetchTransaksiData();
+		include_once 'laporan.php';
 	}
 }

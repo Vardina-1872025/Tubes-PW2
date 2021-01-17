@@ -92,7 +92,7 @@ if(!isset($_SESSION['isLoggedIn'])){
                         </button>
                         <div class="dropdown-content">
                         <a href="?navito=bahanbakar">Olah Data Bahan Bakar</a>
-                        <a href="#">Laporan Keuntungan</a>
+                        <a href="?navito=laporan">Laporan Keuntungan</a>
                         </div>
                     </div>
 				<?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='pegawai'){?>
@@ -148,6 +148,10 @@ if(!isset($_SESSION['isLoggedIn'])){
                 case 'pegawai':
                     $ownerController = new ownerController();
                     $ownerController->indexUPeg();
+                    break;
+				case 'laporan':
+                    $ownerController = new ownerController();
+                    $ownerController->indexL();
                     break;
                 case 'kendaraan':
                     $memberController = new memberController();
