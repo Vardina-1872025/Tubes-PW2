@@ -57,16 +57,12 @@ class ownerController{
 	}
 	
 	public function indexC(){
-		//update
-        $pegId = filter_input(INPUT_GET, 'pegid');
-        if(isset($pegId)){
-            $pegawai = $this->ownerDao->fetchCabang($pegId);
-        }
+		$cabId = filter_input(INPUT_GET, 'cabid');
 		//hapus
         $command = filter_input(INPUT_GET, 'cmd');
         if(isset($command) && $command == 'del'){
-            if(isset($pegId)){
-                $result = $this->ownerDao->deleteCabang($pegId);
+            if(isset($cabId)){
+                $result = $this->ownerDao->deleteCabang($cabId);
 				if ($result){
 					echo '<div class="bg-success">Data successfully deleted</div>';
 				} else {
@@ -74,6 +70,30 @@ class ownerController{
 				}
             }
         }
+		//tambah
+		$submitPressed = filter_input(INPUT_POST,"btnSubmit");
+		if($submitPressed){
+			//Mengambil data
+			$idcab = filter_input(INPUT_POST,"txtIdCab");
+			$nama = filter_input(INPUT_POST,"txtNama");
+			$alamat = filter_input(INPUT_POST,"txtAlamat");
+			$telp= filter_input(INPUT_POST,"txtTelp");
+			$owner= filter_input(INPUT_POST,"txtOwner");
+			
+			$acab = new Cabang();
+			$acab->setId_cabang($idcab);
+			$acab->setNama_cabang($nama);
+			$acab->setAlamat($alamat);
+			$acab->setNo_telp_cabang($telp);
+			$acab->setId_owner($owner);
+			
+			$result = $this->ownerDao->addCabang($albums);
+			if ($result){
+				echo '<div class="bg-success">Data successfully added (Title : '.$title.')</div>';
+			} else {
+				echo '<div class="bg-error">Error Add Data</div>';
+			}
+		}
 		$result = $this->ownerDao->fetchCabangData();
 		$allOwner = $this->ownerDao->fetchOwnerData();
 		include_once 'cabang.php';
@@ -81,29 +101,31 @@ class ownerController{
 	
 	public function indexUC(){
 		//update
-        $pegId = filter_input(INPUT_GET, 'pegid');
-        if(isset($pegId)){
-            $pegawai = $this->pegawaiDao->fetchPegawai($pegId);
+        $cabId = filter_input(INPUT_GET, 'cabid');
+        if(isset($cabId)){
+            $cabang = $this->ownerDao->fetchCabang($cabId);
         }
 		
 		$submitPressed = filter_input(INPUT_POST,"btnSubmit");
 		if($submitPressed){
 			//Mengambil data
 			$nama = filter_input(INPUT_POST,"txtNama");
-			$nip = filter_input(INPUT_POST,"txtNip");
-			$cabang= filter_input(INPUT_POST,"txtCabang");
+			$alamat = filter_input(INPUT_POST,"txtAlamat");
+			$telp= filter_input(INPUT_POST,"txtTelp");
+			$owner= filter_input(INPUT_POST,"txtOwner");
 			
-			$upeg = new pegawai();
-			$upeg->setId_pegawai($pegawai->getId_pegawai());
-			$upeg->setNama_pegawai($nama);
-			$upeg->setNip($nip);
-			$upeg->setId_cabang($cabang);
+			$ucab = new Cabang();
+			$ucab->setId_cabang($cabang->getId_cabang());
+			$ucab->setNama_cabang($nama);
+			$ucab->setAlamat($alamat);
+			$ucab->setNo_telp_cabang($telp);
+			$ucab->setId_owner($owner);
 			
-			$this->ownerDao->updatePegawai($upeg);
-			header("location:index.php?navito=viewpegawai");
+			$this->ownerDao->updateCabang($ucab);
+			header("location:index.php?navito=cabang");
 		}
-		$allCabang = $this->ownerDao->fetchCabangData();
-		include_once './pegawai.php';
+		$allOwner = $this->ownerDao->fetchOwnerData();
+		include_once './update_cabang.php';
 	}
 	
 	public function indexB(){

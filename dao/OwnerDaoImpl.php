@@ -40,6 +40,47 @@ class OwnerDaoImpl{
         return $stmt->fetchObject('Cabang');
     }
 	
+	public function addCabang(Cabang $cbg){
+		$result=0;
+		$link = PDOUtil::createConnection();
+		$query = "INSERT INTO cabang (id_cabang,nama_cabang,alamat,no_telp_cabang,id_owner) VALUES (?,?,?,?,?)";
+		$stmt = $link->prepare($query);
+		$stmt->bindValue(1, $cbg->getId_cabang());
+		$stmt->bindValue(2, $cbg->getNama_cabang());
+        $stmt->bindValue(3, $cbg->getAlamat());
+        $stmt->bindValue(4, $cbg->getNo_telp_cabang());
+		$stmt->bindValue(5, $cbg->getId_owner());
+		$link->beginTransaction();
+		if($stmt->execute()){
+			$link->commit();
+			$result=1;
+		} else {
+			$link->rollBack();
+		}
+		PDOUtil::closeConnection($link);
+		return $result;
+	}
+
+	public function updateCabang(Cabang $cbg){
+        $result = 0;
+        $link = PDOUtil::createConnection();
+        $query = "UPDATE cabang SET nama_cabang = ?, alamat = ?, no_telp_cabang = ? WHERE id_cabang = ?";
+        $stmt = $link->prepare($query);
+        $stmt->bindValue(1, $cbg->getNama_cabang());
+        $stmt->bindValue(2, $cbg->getAlamat());
+        $stmt->bindValue(3, $cbg->getNo_telp_cabang());
+        $stmt->bindValue(4, $cbg->getId_cabang());
+        $link->beginTransaction();
+        if($stmt->execute()){
+            $link->commit();
+            $result = 1;
+        } else{
+            $link->rollBack();
+        }
+        PDOUtil::closeConnection($link);
+        return $result;
+    }
+	
 	public function deleteCabang($id){
 		$result = 0;
 		$link = PDOUtil::createConnection();

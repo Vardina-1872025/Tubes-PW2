@@ -1,5 +1,13 @@
 <h2>Form Input Cabang</h2>
 <form method="POST" action="">
+	<div class="row row-space">
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label">Id Cabang</label>
+                <input class="input--style-4" type="text" name="txtIdCab" placeholder="Masukkan Id Cabang" required="">
+            </div>
+        </div>
+    </div>
     <div class="row row-space">
         <div class="col-2">
             <div class="input-group">
@@ -28,7 +36,7 @@
         <label class="label">Owner</label>
         <div class="rs-select2 js-select-simple select--no-search">
             <select name="txtOwner" required="">
-                <option disabled="disabled" selected="selected">Choose option</option>
+                <option disabled="disabled" selected="selected">Choose owner</option>
 					<?php 
 						/* @var $row2 Owner*/
 						foreach($allOwner as $row2) {
@@ -70,8 +78,8 @@
 			$ido = $row->getId_owner();
 			$ownObj = $this->ownerDao->fetchOwner($ido);
 			echo '<td>' . $ownObj->getNama_owner() . '</td>';
-			echo '<td><button class="btn btn--radius-2 btn--blue" onclick="updateOwner(\''.$row->getId_cabang().'\')">Update</button>
-            <button class="btn btn--radius-2 btn--blue" onclick="deleteOwner(\''.$row->getId_cabang().'\')">Delete</button></td>';
+			echo '<td><button class="btn btn--radius-2 btn--blue" onclick="updateCabang(\''.$row->getId_cabang().'\')">Update</button>
+            <button class="btn btn--radius-2 btn--blue" onclick="deleteCabang(\''.$row->getId_cabang().'\')">Delete</button></td>';
             echo '</tr>';
         }
         $link = null;
