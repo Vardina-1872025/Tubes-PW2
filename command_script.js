@@ -13,6 +13,10 @@ function updateCabang(id_cabang){
     window.location = "?navito=cabu&cabid=" + id_cabang;
 }
 
+function updateKendaraan(id_member){
+    window.location = "?navito=uken&cabid=" + id_member;
+}
+
 function deleteCabang(id_cabang){
     let confirmation = window.confirm("Are you sure want to delete this branch?");
     if(confirmation){

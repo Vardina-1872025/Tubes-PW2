@@ -87,9 +87,9 @@ class ownerController{
 			$acab->setNo_telp_cabang($telp);
 			$acab->setId_owner($owner);
 			
-			$result = $this->ownerDao->addCabang($albums);
+			$result = $this->ownerDao->addCabang($acab);
 			if ($result){
-				echo '<div class="bg-success">Data successfully added (Title : '.$title.')</div>';
+				echo '<div class="bg-success">Data successfully added (Branch : '.$nama.')</div>';
 			} else {
 				echo '<div class="bg-error">Error Add Data</div>';
 			}

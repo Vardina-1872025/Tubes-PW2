@@ -122,25 +122,8 @@ if(!isset($_SESSION['isLoggedIn'])){
                         </div>
                     </div>
                 <?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='member'){?>
-					<div class="dropdown">
-                        <button class="dropbtn">Data Kendaraan 
-                        <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                        <a href="?navito=kendaraan">Input Data Kendaraan</a>
-                        <a href="#">View Data Kendaraan</a>
-                        </div>
-                    </div> 
-                    <div class="dropdown">
-                        <button class="dropbtn">Rating
-                        <i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                        <a href="#">Input Rating</a>
-                        </div>
-                    </div>
-                    <li><a href="?navito=#">Biodata</a></li>
-                    <li><a href="?navito=#">Reminder</a></li>
+					<li><a href="?navito=kendaraan">Data Kendaraan</a></li>
+                    <li><a href="?navito=reminder">Reminder</a></li>
                     <li><a href="?navito=#">Tukar Poin</a></li>
 				<?php } ?>
                 <?php if($_SESSION['isLoggedIn']){ ?>
@@ -188,6 +171,10 @@ if(!isset($_SESSION['isLoggedIn'])){
 				case 'cabu':
                     $ownerController = new ownerController();
                     $ownerController->indexUC();
+                    break;
+                case 'uken':
+                    $memberController = new memberController();
+                    $memberController->indexUK();
                     break;
 				case 'bahanbakar':
                     $ownerController = new ownerController();

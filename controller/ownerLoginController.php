@@ -40,6 +40,7 @@ class ownerLoginController{
                 $_SESSION['my_session'] = true;
                 $_SESSION['session_user'] = $result3['nama_member'];
                 $_SESSION['session_role'] = $result3['jabatan'];
+                $_SESSION['session_id'] = $result3['id_member'];
                 $_SESSION['isLoggedIn'] = true;
 				header("location:index.php");
 			}
