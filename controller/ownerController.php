@@ -12,16 +12,12 @@ class ownerController{
     }
 
     public function index(){
-		//update
-        $artid = filter_input(INPUT_GET, 'artid');
-        if(isset($artid)){
-            $pegawai = $this->pegawaiDao->fetchPegawai($artid);
-        }
+        $pegId = filter_input(INPUT_GET, 'pegid');
 		//hapus
         $command = filter_input(INPUT_GET, 'cmd');
         if(isset($command) && $command == 'del'){
-            if(isset($artid)){
-                $result = $this->ownerDao->deletePegawai($artid);
+            if(isset($pegId)){
+                $result = $this->ownerDao->deletePegawai($pegId);
 				if ($result){
 					echo '<div class="bg-success">Data successfully deleted</div>';
 				} else {
@@ -29,31 +25,53 @@ class ownerController{
 				}
             }
         }
-		
         $result = $this->pegawaiDao->fetchPegawaiData();
-        include_once 'pegawai.php';
+        include_once 'view_pegawai.php';
     }
 	
+	public function indexUPeg(){
+		//update
+        $pegId = filter_input(INPUT_GET, 'pegid');
+        if(isset($pegId)){
+            $pegawai = $this->pegawaiDao->fetchPegawai($pegId);
+        }
+		
+		$submitPressed = filter_input(INPUT_POST,"btnSubmit");
+		if($submitPressed){
+			//Mengambil data
+			$nama = filter_input(INPUT_POST,"txtNama");
+			$nip = filter_input(INPUT_POST,"txtNip");
+			$cabang= filter_input(INPUT_POST,"txtCabang");
+			
+			$upeg = new pegawai();
+			$upeg->setId_pegawai($pegawai->getId_pegawai());
+			$upeg->setNama_pegawai($nama);
+			$upeg->setNip($nip);
+			$upeg->setId_cabang($cabang);
+			
+			$this->ownerDao->updatePegawai($upeg);
+			header("location:index.php?navito=viewpegawai");
+		}
+		$allCabang = $this->ownerDao->fetchCabangData();
+		include_once './pegawai.php';
+	}
+	
 	public function indexC(){
-		//input
-        $submitPressed = filter_input(INPUT_POST, "btnSubmit");
-        if(isset($submitPressed)) {
-            // Get Data dari Form
-            $nama = filter_input(INPUT_POST, "txtNama");
-            $nip = filter_input(INPUT_POST, "txtNip");
-            $cabang = filter_input(INPUT_POST, "txtCabang");
-
-            // Conect ke db
-            $pegawai = new pegawai();
-            $pegawai->setNama_pegawai($nama);
-            $pegawai->setNip($nip);
-            $pegawai->setId_cabang($cabang);
-
-            $result = $this->pegawaiDao->addPegawai($pegawai);
-            if($result){
-                echo '<div class="bg-success">Data successfully added (Cabang: ' . $nama . ')</div>';
-            } else{
-                echo '<div class="bg-error">Error add data</div>';
+		//update
+        $pegId = filter_input(INPUT_GET, 'pegid');
+        if(isset($pegId)){
+            $pegawai = $this->ownerDao->fetchCabang($pegId);
+        }
+		//hapus
+        $command = filter_input(INPUT_GET, 'cmd');
+        if(isset($command) && $command == 'del'){
+            if(isset($pegId)){
+                $result = $this->ownerDao->deleteCabang($pegId);
+				if ($result){
+					echo '<div class="bg-success">Data successfully deleted</div>';
+				} else {
+					echo '<div class="bg-success">An error has occured</div>';
+				}
             }
         }
 		$result = $this->ownerDao->fetchCabangData();
@@ -61,9 +79,31 @@ class ownerController{
 		include_once 'cabang.php';
 	}
 	
-	public function indexP(){
-		$result = $this->pegawaiDao->fetchPegawaiData();
-		include_once 'view_pegawai.php';
+	public function indexUC(){
+		//update
+        $pegId = filter_input(INPUT_GET, 'pegid');
+        if(isset($pegId)){
+            $pegawai = $this->pegawaiDao->fetchPegawai($pegId);
+        }
+		
+		$submitPressed = filter_input(INPUT_POST,"btnSubmit");
+		if($submitPressed){
+			//Mengambil data
+			$nama = filter_input(INPUT_POST,"txtNama");
+			$nip = filter_input(INPUT_POST,"txtNip");
+			$cabang= filter_input(INPUT_POST,"txtCabang");
+			
+			$upeg = new pegawai();
+			$upeg->setId_pegawai($pegawai->getId_pegawai());
+			$upeg->setNama_pegawai($nama);
+			$upeg->setNip($nip);
+			$upeg->setId_cabang($cabang);
+			
+			$this->ownerDao->updatePegawai($upeg);
+			header("location:index.php?navito=viewpegawai");
+		}
+		$allCabang = $this->ownerDao->fetchCabangData();
+		include_once './pegawai.php';
 	}
 	
 	public function indexB(){

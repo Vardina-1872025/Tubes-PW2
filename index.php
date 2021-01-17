@@ -89,9 +89,8 @@ if(!isset($_SESSION['isLoggedIn'])){
                         <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-content">
-                        <a href="?navito=pegawai">Olah Data Pegawai</a>
-						<a href="?navito=viewpegawai">View Data Pegawai</a>
-                        <a href="?navito=cabang">Input Data Cabang</a>
+						<a href="?navito=viewpegawai">Olah Data Pegawai</a>
+                        <a href="?navito=cabang">Olah Data Cabang</a>
                         </div>
                     </div> 
                     <div class="dropdown">
@@ -176,7 +175,7 @@ if(!isset($_SESSION['isLoggedIn'])){
                     break;
                 case 'pegawai':
                     $ownerController = new ownerController();
-                    $ownerController->index();
+                    $ownerController->indexUPeg();
                     break;
                 case 'kendaraan':
                     $memberController = new memberController();
@@ -185,6 +184,10 @@ if(!isset($_SESSION['isLoggedIn'])){
 				case 'cabang':
                     $ownerController = new ownerController();
                     $ownerController->indexC();
+                    break;
+				case 'cabu':
+                    $ownerController = new ownerController();
+                    $ownerController->indexUC();
                     break;
 				case 'bahanbakar':
                     $ownerController = new ownerController();
@@ -212,7 +215,7 @@ if(!isset($_SESSION['isLoggedIn'])){
 					break;
 				case 'viewpegawai':
                     $ownerController = new ownerController();
-                    $ownerController->indexP();
+                    $ownerController->index();
 					break;
                 default:
                     {

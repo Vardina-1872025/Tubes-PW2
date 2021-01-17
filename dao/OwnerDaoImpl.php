@@ -40,6 +40,23 @@ class OwnerDaoImpl{
         return $stmt->fetchObject('Cabang');
     }
 	
+	public function deleteCabang($id){
+		$result = 0;
+		$link = PDOUtil::createConnection();
+		$query = "DELETE FROM cabang WHERE id_cabang = ?";
+		$stmt = $link -> prepare($query);
+		$stmt-> bindParam(1, $id);
+		$link->beginTransaction();
+		if($stmt->execute()){
+			$link->commit();
+			$result = 1;
+		} else{
+			$link->rollBack();
+		}
+		PDOUtil::closeConnection($link);
+        return $result;
+	}
+	
 	public function fetchBahanBakarData(){
         $link = PDOUtil::createConnection();
         $query = "SELECT * FROM bahanbakar";
@@ -52,11 +69,12 @@ class OwnerDaoImpl{
     public function updatePegawai(Pegawai $pegawai){
         $result = 0;
         $link = PDOUtil::createConnection();
-        $query = "INSERT into pegawai (nama, nip, cabang) VALUES (?, ?, ?)";
+        $query = "UPDATE pegawai SET nama_pegawai = ?, nip = ?, id_cabang = ? WHERE id_pegawai = ?";
         $stmt = $link->prepare($query);
         $stmt->bindValue(1, $pegawai->getNama_pegawai());
         $stmt->bindValue(2, $pegawai->getNip());
         $stmt->bindValue(3, $pegawai->getId_cabang());
+        $stmt->bindValue(4, $pegawai->getId_pegawai());
         $link->beginTransaction();
         if($stmt->execute()){
             $link->commit();
