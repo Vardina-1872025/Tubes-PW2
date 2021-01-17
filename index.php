@@ -64,11 +64,14 @@ if(!isset($_SESSION['isLoggedIn'])){
         <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
         <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
+		<link rel="stylesheet" type="text/css" href="css/theme1.css"/>
         <link rel="stylesheet" type="text/css" href="css/web_style.css">
         <link rel="stylesheet" type="text/css" href="css/datatables.css">
         <link rel="stylesheet" type="text/css" href="css/login_style.css">
+		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
         <script type="text/javascript" src="js/functional_js.js"></script>
         <script type="text/javascript" src="command_script.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
     </head>
     <body>
         
