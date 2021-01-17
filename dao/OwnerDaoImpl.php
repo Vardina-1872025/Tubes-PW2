@@ -98,11 +98,64 @@ class OwnerDaoImpl{
         return $result;
 	}
 	
+	public function fetchBahanBakar($id_bbm){
+        $link = PDOUtil::createConnection();
+        $query = "SELECT * FROM bahanbakar WHERE id_bahanbakar = ?";
+        $stmt = $link->prepare($query);
+        $stmt->bindParam(1, $id_bbm);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
+        PDOUtil::closeConnection($link);
+        return $stmt->fetchObject('Bahanbakar');
+    }
+	
 	public function fetchBahanBakarData(){
         $link = PDOUtil::createConnection();
         $query = "SELECT * FROM bahanbakar";
         $result = $link->query($query);
         $result->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Bahanbakar');
+        PDOUtil::closeConnection($link);
+        return $result;
+    }
+	
+	public function updateHarga(Bahanbakar $bbm){
+        $result = 0;
+        $link = PDOUtil::createConnection();
+        $query = "UPDATE bahanbakar SET harga = ? WHERE id_bahanbakar = ?";
+        $stmt = $link->prepare($query);
+        $stmt->bindValue(1, $bbm->getHarga());
+        $stmt->bindValue(2, $bbm->getId_bahanbakar());
+        $link->beginTransaction();
+        if($stmt->execute()){
+            $link->commit();
+            $result = 1;
+        } else{
+            $link->rollBack();
+        }
+        PDOUtil::closeConnection($link);
+        return $result;
+    }
+	
+	public function addPegawai(Pegawai $pegawai){
+        $result = 0;
+        $link = PDOUtil::createConnection();
+		$rate =0;
+        $query = "INSERT into pegawai (id_pegawai, nama_pegawai, nip, password, id_cabang, total_rating, jabatan) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $link->prepare($query);
+		$stmt->bindValue(1, $pegawai->getId_pegawai());
+        $stmt->bindValue(2, $pegawai->getNama_pegawai());
+        $stmt->bindValue(3, $pegawai->getNip());
+        $stmt->bindValue(4, $pegawai->getPassword());
+        $stmt->bindValue(5, $pegawai->getId_cabang());
+        $stmt->bindValue(6, $rate);
+        $stmt->bindValue(7, "pegawai");
+        $link->beginTransaction();
+        if($stmt->execute()){
+            $link->commit();
+            $result = 1;
+        } else{
+            $link->rollBack();
+        }
         PDOUtil::closeConnection($link);
         return $result;
     }

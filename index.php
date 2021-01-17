@@ -176,6 +176,10 @@ if(!isset($_SESSION['isLoggedIn'])){
                     $memberController = new memberController();
                     $memberController->indexUK();
                     break;
+				case 'ubbm':
+                    $ownerController = new ownerController();
+                    $ownerController->indexUB();
+                    break;
 				case 'bahanbakar':
                     $ownerController = new ownerController();
                     $ownerController->indexB();

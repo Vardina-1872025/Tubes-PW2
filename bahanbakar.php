@@ -18,7 +18,7 @@
             echo '<td>' . $row->getNama_bahanbakar() . '</td>';
 			echo '<td>' . $row->getPoin() . '</td>';
             echo '<td>' . $row->getHarga() . '</td>';
-			echo '<td><button class="btn btn--radius-2 btn--blue" onclick="updateOwner(\''.$row->getId_bahanbakar().'\')">Update</button>';
+			echo '<td><button class="btn btn--radius-2 btn--blue" onclick="updateBbm(\''.$row->getId_bahanbakar().'\')">Update</button>';
             echo '</tr>';
         }
         $link = null;

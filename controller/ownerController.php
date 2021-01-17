@@ -25,7 +25,34 @@ class ownerController{
 				}
             }
         }
+		
+		//tambah
+		$submitPressed = filter_input(INPUT_POST,"btnSubmit");
+		if($submitPressed){
+			//Mengambil data
+			$idpeg = filter_input(INPUT_POST,"txtIdPeg");
+			$nama = filter_input(INPUT_POST,"txtNama");
+			$nip = filter_input(INPUT_POST,"txtNip");
+			$pass= filter_input(INPUT_POST,"txtPass");
+			$cbg= filter_input(INPUT_POST,"txtCabang");
+			$md5pass = md5($pass);
+			
+			$apeg = new pegawai();
+			$apeg->setId_pegawai($idpeg);
+			$apeg->setNama_pegawai($nama);
+			$apeg->setNip($nip);
+			$apeg->setPassword($md5pass);
+			$apeg->setId_cabang($cbg);
+			
+			$result = $this->ownerDao->addPegawai($apeg);
+			if ($result){
+				echo '<div class="bg-success">Data successfully added (Employee : '.$nama.')</div>';
+			} else {
+				echo '<div class="bg-error">Error Add Data</div>';
+			}
+		}
         $result = $this->pegawaiDao->fetchPegawaiData();
+		$allCabang = $this->ownerDao->fetchCabangData();
         include_once 'view_pegawai.php';
     }
 	
@@ -129,7 +156,31 @@ class ownerController{
 	}
 	
 	public function indexB(){
+		
 		$result = $this->ownerDao->fetchBahanBakarData();
 		include_once 'bahanbakar.php';
+	}
+	
+	public function indexUB(){
+		//update
+        $cabId = filter_input(INPUT_GET, 'cabid');
+        if(isset($cabId)){
+            $bbm = $this->ownerDao->fetchBahanBakar($cabId);
+        }
+		
+		$submitPressed = filter_input(INPUT_POST,"btnSubmit");
+		if($submitPressed){
+			//Mengambil data
+			$hrg = filter_input(INPUT_POST,"txtHrg");
+			
+			$ucab = new Bahanbakar();
+			$ucab->setId_bahanbakar($bbm->getId_bahanbakar());
+			$ucab->setHarga($hrg);
+			
+			$this->ownerDao->updateHarga($ucab);
+			header("location:index.php?navito=bahanbakar");
+		}
+		$result = $this->ownerDao->fetchBahanBakarData();
+		include_once 'update_bbm.php';
 	}
 }
