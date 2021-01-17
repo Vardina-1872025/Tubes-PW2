@@ -2,75 +2,97 @@
 <?php if($_SESSION['isLoggedIn'] == TRUE) {
 ?>
 <form method="POST" action="">
+<div class="row row-space">
+    <div class="col-2">
+        <div class="input-group">
+            <label class="label">Tanggal Pembelian</label>
+                <div class="input-group-icon">
+                    <input class="input--style-4 js-datepicker" type="text" name="txtTanggalPembelian" placeholder="Pilih Tanggal Pembelian" required=""/>
+                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                </div>
+         </div>
+    </div>
+</div>
+    <div class="input-group">
+        <label class="label">Member</label>
+        <div class="rs-select2 js-select-simple select--no-search">
+            <select name="txtMember" required="">
+                <option disabled="disabled" selected="selected">Choose Member</option>
+					<?php 
+						/* @var $row3 Member*/
+						foreach($allMember as $row3) {
+					?>
+					<option value="<?php echo $row3->getId_member(); ?>"><?php echo $row3->getNama_member(); ?></option>
+					<?php
+						}
+					?>
+            </select>
+            <div class="select-dropdown"></div>
+        </div>
+    </div>
+    <div class="input-group">
+        <label class="label">Pegawai</label>
+        <div class="rs-select2 js-select-simple select--no-search">
+            <select name="txtPegawai" required="">
+                <option disabled="disabled" selected="selected">Choose Pegawai</option>
+					<?php 
+						/* @var $row3 Owner*/
+						foreach($allPegawai as $row3) {
+					?>
+					<option value="<?php echo $row3->getId_pegawai(); ?>"><?php echo $row3->getNama_pegawai(); ?></option>
+					<?php
+						}
+					?>
+            </select>
+            <div class="select-dropdown"></div>
+        </div>
+    </div>
+    <div class="input-group">
+        <label class="label">Bahan Bakar</label>
+        <div class="rs-select2 js-select-simple select--no-search">
+            <select name="txtBahanBakar" required="">
+                <option disabled="disabled" selected="selected">Choose Bahan Bakar</option>
+					<?php 
+						/* @var $row3 Owner*/
+						foreach($allBahanBakar as $row3) {
+					?>
+					<option value="<?php echo $row3->getId_bahanbakar(); ?>"><?php echo $row3->getNama_bahanbakar(); ?></option>
+					<?php
+						}
+					?>
+            </select>
+            <div class="select-dropdown"></div>
+        </div>
+    </div>
     <div class="row row-space">
         <div class="col-2">
             <div class="input-group">
-                <label class="label">Nama Pegawai</label>
-                <input class="input--style-4" type="text" name="txtNamaPegawai" placeholder="Masukkan Nama Pegawai" required="">
+                <label class="label">Liter</label>
+                <input class="input--style-4" type="text" name="txtLiter" placeholder="Masukkan Liter "required="">
             </div>
         </div>
     </div>
     <div class="row row-space">
         <div class="col-2">
             <div class="input-group">
-                <label class="label">Tanggal Pembelian</label>
-                <input class="input--style-4" type="text" name="txtTanggalPembelian" placeholder="Masukkan Tanggal Pembelian" required="">
+                <label class="label">Total Poin</label>
+                <input class="input--style-4" type="text" name="txtTotalPoin" placeholder="Masukkan Total Poin (1 - 5)" required="">
             </div>
         </div>
     </div>
     <div class="row row-space">
         <div class="col-2">
             <div class="input-group">
-                <label class="label">Jenis Bahan Bakar</label>
-                <input class="input--style-4" type="text" name="txtJenisBahanBakar" placeholder="Pilih Jenis Bahan Bakar" required="">
+                <label class="label">Tanggal Exp</label>
+                <input class="input--style-4" type="text" name="txtTanggalExp" placeholder="Masukkan Tanggal Exp" required="">
             </div>
         </div>
     </div>
     <div class="row row-space">
         <div class="col-2">
             <div class="input-group">
-                <label class="label">ID Member (Non Member - )</label>
-                <input class="input--style-4" type="text" name="txtIDMember" placeholder="Masukkan ID Member" required="">
-            </div>
-        </div>
-    </div>
-    <div class="row row-space">
-        <div class="col-2">
-            <div class="input-group">
-                <label class="label">Poin</label>
-                <input class="input--style-4" type="text" name="txtPoin" placeholder=" "required="">
-            </div>
-        </div>
-    </div>
-    <div class="row row-space">
-        <div class="col-2">
-            <div class="input-group">
-                <label class="label">ID Cabang</label>
-                <input class="input--style-4" type="text" name="txtIDCabang" placeholder="Masukkan ID Cabang" required="">
-            </div>
-        </div>
-    </div>
-    <div class="row row-space">
-        <div class="col-2">
-            <div class="input-group">
-                <label class="label">Total Pembelian</label>
-                <input class="input--style-4" type="text" name="txtTotalPembelian" placeholder="Masukkan Total Pembelian (Rp)" required="">
-            </div>
-        </div>
-    </div>
-    <div class="row row-space">
-        <div class="col-2">
-            <div class="input-group">
-                <label class="label">Total Yang Dibayarkan</label>
-                <input class="input--style-4" type="text" name="txtTotalBayarkan" placeholder="Masukkan Total yang Dibayarkan (Rp)" required="">
-            </div>
-        </div>
-    </div>
-    <div class="row row-space">
-        <div class="col-2">
-            <div class="input-group">
-                <label class="label">Total Yang Dikembalikan</label>
-                <input class="input--style-4" type="text" name="txtTotalKembalian" placeholder="" required="">
+                <label class="label">Rating</label>
+                <input class="input--style-4" type="text" name="txtRating" placeholder="Masukkan Rating" required="">
             </div>
         </div>
     </div>
@@ -101,16 +123,17 @@
     </thead>
     <tbody>
     <?php
-        foreach($result as $row) {
+        foreach($result as $row3) {
             echo '<tr>';
-            echo '<td>' . $row->getId_pegawai() . '</td>';
-            echo '<td>' . $row->getTanggal() . '</td>';
-            echo '<td>' . $row->getId_bahanbakar() . '</td>';
-            echo '<td>' . $row->getId_member() . '</td>';
-            echo '<td>' . $row->getTot_poin() . '</td>';
+            echo '<td>' . $row3->getId_pegawai() . '</td>';
+            $penampung = DATE_FORMAT(date_create($row3->getTanggal()),'d M Y'); 
+            echo '<td>' . $penampung . '</td>';
+            echo '<td>' . $row3->getId_bahanbakar() . '</td>';
+            echo '<td>' . $row3->getId_member() . '</td>';
+            echo '<td>' . $row3->getTot_poin() . '</td>';
             if($_SESSION['isLoggedIn'] == TRUE) {
-            echo '<td><button class="btn btn--radius-2 btn--blue" onclick="updateMember(\''.$row->getId_pegawai().'\')">Update</button>
-            <button class="btn btn--radius-2 btn--blue" onclick="deleteMember(\''.$row->getId_pegawai().'\')">Delete</button></td>';
+            echo '<td><button class="btn btn--radius-2 btn--blue" onclick="updateMember(\''.$row3->getId_pegawai().'\')">Update</button>
+            <button class="btn btn--radius-2 btn--blue" onclick="deleteTransaksi(\''.$row3->getId_transaksi().'\')">Delete</button></td>';
             }
             echo '</tr>';
         }

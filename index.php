@@ -1,7 +1,5 @@
 <?php
 session_start();
-include_once 'entity/Albums.php';
-include_once 'entity/Artists.php';
 include_once 'entity/login.php';
 include_once 'entity/pegawaiLogin.php';
 include_once 'entity/pegawai.php';
@@ -17,12 +15,6 @@ include_once 'controller/pegawaiController.php';
 include_once 'controller/pegawaiView.php';
 include_once 'controller/memberView.php';
 include_once 'controller/memberController.php';
-include_once 'controller/artistsController.php';
-include_once 'controller/albumsController.php';
-include_once 'controller/artistsUpdateController.php';
-include_once 'controller/albumsUpdateController.php';
-include_once 'dao/AlbumsDaoImpl.php';
-include_once 'dao/ArtistsDaoImpl.php';
 include_once 'dao/loginDaoImpl.php';
 include_once 'dao/loginPegawaiDaoImpl.php';
 include_once 'dao/loginMemberDaoImpl.php';
@@ -31,8 +23,6 @@ include_once 'dao/OwnerDaoImpl.php';
 include_once 'dao/MemberDaoImpl.php';
 include_once 'dao/TransaksiDaoImpl.php';
 include_once 'util/PDOUtil.php';
-include_once 'db_function/artists_function.php';
-include_once 'db_function/albums_function.php';
 include_once 'db_function/loginOwner_function.php';
 include_once 'db_function/loginPegawai_function.php';
 if(!isset($_SESSION['my_session'])){
@@ -147,15 +137,11 @@ if(!isset($_SESSION['isLoggedIn'])){
                 }
             }
             switch ($nav) {
-                case 'artists':
-                    $ArtistsController = new artistsController();
-                    $ArtistsController->index();
+				case 'transaksi':
+                    $pegawaiController = new pegawaiController();
+                    $pegawaiController->indexMem();
                     break;
-                case 'albums':
-                    $AlbumsController = new albumsController();
-                    $AlbumsController->index();
-                    break;
-                case 'transaksi':
+				case 'deleteTrans':
                     $pegawaiController = new pegawaiController();
                     $pegawaiController->index();
                     break;
@@ -186,14 +172,6 @@ if(!isset($_SESSION['isLoggedIn'])){
 				case 'bahanbakar':
                     $ownerController = new ownerController();
                     $ownerController->indexB();
-                    break;
-                case 'artu':
-                    $ArtistsUpdateController = new artistsUpdateController();
-                    $ArtistsUpdateController->index();
-                    break;
-                case 'albu':
-                    $AlbumsUpdateController = new albumsUpdateController();
-                    $AlbumsUpdateController->index();
                     break;
                 case 'logout':
                     $ownerLoginController = new ownerLoginController();

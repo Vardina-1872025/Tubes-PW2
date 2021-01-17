@@ -20,6 +20,13 @@ function deleteCabang(id_cabang){
     }
 }
 
+function deleteTransaksi(id_transaksi){
+    let confirmation = window.confirm("Are you sure want to delete this transaksi?");
+    if(confirmation){
+        window.location = "?navito=deleteTrans&cmd=del&pegid=" + id_transaksi;
+    }
+}
+
 function updateKendaraan(id_member){
     window.location = "?navito=uken&cabid=" + id_member;
 }
