@@ -18,7 +18,7 @@ class pegawaiViewController{
         // if(isset($command) && $command == 'del'){
         //     $artid = filter_input(INPUT_GET, 'artid');
         //     if(isset($artid)){
-        //         $link = new PDO("mysql:host=localhost; dbname=tubespw2", "root", "");
+        //         $link = new PDO("mysql:host=localhost; dbname=pw2tubes", "root", "");
         //         $link->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
         //         $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //         $query = "DELETE FROM bertransaksi WHERE id_transaksi = ?";

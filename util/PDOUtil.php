@@ -4,7 +4,7 @@
 
 class PDOUtil{
     public static function createConnection(){
-        $link = new PDO("mysql:host=localhost; dbname=tubespw2", "root", "");
+        $link = new PDO("mysql:host=localhost; dbname=pw2tubes", "root", "");
         $link->setAttribute(PDO::ATTR_AUTOCOMMIT,false);
         $link->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         return $link;

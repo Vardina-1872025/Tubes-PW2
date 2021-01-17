@@ -18,7 +18,7 @@ class memberController{
         if(isset($command) && $command == 'del'){
             $artid = filter_input(INPUT_GET, 'artid');
             if(isset($artid)){
-                $link = new PDO("mysql:host=localhost; dbname=tubespw2", "root", "");
+                $link = new PDO("mysql:host=localhost; dbname=pw2tubes", "root", "");
                 $link->setAttribute(PDO::ATTR_AUTOCOMMIT, false);
                 $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $query = "DELETE FROM member WHERE id_member = ?";
@@ -38,17 +38,19 @@ class memberController{
         $submitPressed = filter_input(INPUT_POST, "btnSubmit");
         if(isset($submitPressed)) {
             // Get Data dari Form
-            $plat = filter_input(INPUT_POST, "txtPlat");
+            $plat_motor = filter_input(INPUT_POST, "txtPlatMotor");
+            $plat_mobil = filter_input(INPUT_POST, "txtPlatMobil");
             $tipe = filter_input(INPUT_POST, "txtTipe");
 
             // Conect ke db
             $member = new member();
-            $member->setPlat_kendaraan($plat);
+            $member->setPlat_motor($plat_motor);
+            $member->setPlat_mobil($plat_mobil);
             $member->setTipe_kendaraan($tipe);
 
             $result = $this->memberDao->addMember($member);
             if($result){
-                echo '<div class="bg-success">Data successfully added (artists: ' . $plat . ')</div>';
+                echo '<div class="bg-success">Data successfully added (artists: ' . $plat_motor . ')</div>';
             } else{
                 echo '<div class="bg-error">Error add data</div>';
             }

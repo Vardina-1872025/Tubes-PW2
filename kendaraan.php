@@ -5,8 +5,16 @@
     <div class="row row-space">
         <div class="col-2">
             <div class="input-group">
-                <label class="label">Plat Kendaraan</label>
-                <input class="input--style-4" type="text" name="txtPlat" placeholder="Masukkan Nomor Plat" required="">
+                <label class="label">Plat Motor</label>
+                <input class="input--style-4" type="text" name="txtPlatMotor" placeholder="Masukkan Nomor Plat Motor" required="">
+            </div>
+        </div>
+    </div>
+    <div class="row row-space">
+        <div class="col-2">
+            <div class="input-group">
+                <label class="label">Plat Mobil</label>
+                <input class="input--style-4" type="text" name="txtPlatMobil" placeholder="Masukkan Nomor Plat Mobil" required="">
             </div>
         </div>
     </div>
@@ -30,8 +38,8 @@
     <thead>
     <tr>
         <th>Id Member</th>
-        <th>Plat Kendaraan</th>
-        <th>Tipe Kendaraan</th>
+        <th>Plat Motor</th>
+        <th>Plat Mobil</th>
         <?php if($_SESSION['isLoggedIn'] == TRUE) {
         ?>
         <th>Action</th>
@@ -45,8 +53,8 @@
         foreach($result as $row) {
             echo '<tr>';
             echo '<td>' . $row->getId_member() . '</td>';
-            echo '<td>' . $row->getPlat_kendaraan() . '</td>';
-            echo '<td>' . $row->getTipe_kendaraan() . '</td>';
+            echo '<td>' . $row->getPlat_motor() . '</td>';
+            echo '<td>' . $row->getPlat_mobil() . '</td>';
             if($_SESSION['isLoggedIn'] == TRUE) {
             echo '<td><button class="btn btn--radius-2 btn--blue" onclick="updateMember(\''.$row->getId_member().'\')">Update</button>
             <button class="btn btn--radius-2 btn--blue" onclick="deleteMember(\''.$row->getId_member().'\')">Delete</button></td>';

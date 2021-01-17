@@ -5,7 +5,8 @@ class member{
     private $email;
     private $no_telp;
     private $poin;
-    private $plat_kendaraan;
+    private $plat_motor;
+    private $plat_mobil;
     private $tipe_kendaraan;
     private $password;
     private $jabatan;
@@ -113,9 +114,9 @@ class member{
     /**
      * Get the value of plat_kendaraan
      */ 
-    public function getPlat_kendaraan()
+    public function getPlat_motor()
     {
-        return $this->plat_kendaraan;
+        return $this->plat_motor;
     }
 
     /**
@@ -123,9 +124,29 @@ class member{
      *
      * @return  self
      */ 
-    public function setPlat_kendaraan($plat_kendaraan)
+    public function setPlat_motor($plat_motor)
     {
-        $this->plat_kendaraan = $plat_kendaraan;
+        $this->plat_motor = $plat_motor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of plat_kendaraan
+     */ 
+    public function getPlat_mobil()
+    {
+        return $this->plat_mobil;
+    }
+
+    /**
+     * Set the value of plat_kendaraan
+     *
+     * @return  self
+     */ 
+    public function setPlat_mobil($plat_mobil)
+    {
+        $this->plat_mobil = $plat_mobil;
 
         return $this;
     }

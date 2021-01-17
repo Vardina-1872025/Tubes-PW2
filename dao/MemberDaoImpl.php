@@ -23,17 +23,18 @@ class MemberDaoImpl{
     public function addMember(Member $member){
         $result = 0;
         $link = PDOUtil::createConnection();
-        $query = "INSERT into member (id_member, nama_member, email, no_telp, poin, plat_kendaraan, tipe_kendaraan, password, jabatan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT into member (id_member, nama_member, email, no_telp, poin, plat_motor, plat_mobil, tipe_kendaraan, password, jabatan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $link->prepare($query);
 		$stmt->bindValue(1, $member->getId_member());
         $stmt->bindValue(2, $member->getNama_member());
         $stmt->bindValue(3, $member->getEmail());
         $stmt->bindValue(4, $member->getNo_telp());
         $stmt->bindValue(5, $member->getPoin());
-        $stmt->bindValue(6, $member->getPlat_kendaraan());
-        $stmt->bindValue(7, $member->getTipe_kendaraan());
-        $stmt->bindValue(8, $member->getPassword());
-        $stmt->bindValue(9, "member");
+        $stmt->bindValue(6, $member->getPlat_motor());
+        $stmt->bindValue(7, $member->getPlat_mobil());
+        $stmt->bindValue(8, $member->getTipe_kendaraan());
+        $stmt->bindValue(9, $member->getPassword());
+        $stmt->bindValue(10, "member");
         $link->beginTransaction();
         if($stmt->execute()){
             $link->commit();
