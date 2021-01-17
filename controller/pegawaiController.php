@@ -29,27 +29,6 @@ class pegawaiController{
 				}
             }
         }
-
-        $submitPressed = filter_input(INPUT_POST, "btnSubmit");
-        // if(isset($submitPressed)) {
-        //     // Get Data dari Form
-        //     $nama = filter_input(INPUT_POST, "txtNama");
-        //     $nip = filter_input(INPUT_POST, "txtNip");
-        //     $cabang = filter_input(INPUT_POST, "txtCabang");
-
-        //     // Conect ke db
-        //     $pegawai = new pegawai();
-        //     $pegawai->setNama_pegawai($nama);
-        //     $pegawai->setNip($nip);
-        //     $pegawai->setId_cabang($cabang);
-
-        //     $result = $this->pegawaiDao->addPegawai($pegawai);
-        //     if($result){
-        //         echo '<div class="bg-success">Data successfully added (artists: ' . $nama . ')</div>';
-        //     } else{
-        //         echo '<div class="bg-error">Error add data</div>';
-        //     }
-        // }
         $result = $this->transaksiDao->fetchTransaksiData();
         include_once 'transaksi.php';
     }
@@ -64,12 +43,12 @@ class pegawaiController{
 			$bahanbakar = filter_input(INPUT_POST,"txtBahanBakar");
 			$liter = filter_input(INPUT_POST,"txtLiter");
             $total_poin = filter_input(INPUT_POST,"txtTotalPoin");
-            $tgl_exp = filter_input(INPUT_POST,"txtTanggalExp");
             $rating = filter_input(INPUT_POST,"txtRating");
 
             $transaksi = new bertransaksi();
-            $d1 = date('%Y-%m-%d',(strtotime($tanggalbeli)));
-            //$penampung = DATE_FORMAT(date_create($tanggalbeli),'YYYY-MM-DD');
+			$date = DateTime::createFromFormat('d/m/Y',$tanggalbeli);
+			$d1 = $date->format("Y-m-d");
+			$tgl_exp = date("Y-m-d", strtotime(date("Y-m-d", strtotime($tanggalbeli)) . " + 1 year"));
             $transaksi->setTanggal($d1);
             $transaksi->setId_member($member);
             $transaksi->setId_pegawai($pegawai);
@@ -92,5 +71,11 @@ class pegawaiController{
         $allPegawai = $this->pegawaiDao->fetchPegawaiData();
         $result = $this->transaksiDao->fetchTransaksiData();
 		include_once './transaksi.php';
+	}
+	
+	public function indexM(){
+		$date = date('Y-m-d');
+		$pegawai = $this->pegawaiDao->fetchPegawaiBulanan($date);
+		include_once './month.php';
 	}
 }

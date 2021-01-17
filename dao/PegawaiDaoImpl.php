@@ -19,6 +19,18 @@ class PegawaiDaoImpl{
         PDOUtil::closeConnection($link);
         return $stmt->fetchObject('Pegawai');
     }
+	
+	public function fetchPegawaiBulanan($tgl){
+        $link = PDOUtil::createConnection();
+        $query = "SELECT * FROM pegawai WHERE id_pegawai = (SELECT id_pegawai FROM bertransaksi WHERE rating = (SELECT MAX(rata) FROM (SELECT AVG(rating) as rata FROM bertransaksi WHERE tanggal IN (MONTH(?))) r ))";
+        $stmt = $link->prepare($query);
+		$stmt->bindParam(1, $tgl);
+        $stmt->setFetchMode(PDO::FETCH_OBJ);
+        $stmt->execute();
+        PDOUtil::closeConnection($link);
+        return $stmt->fetchObject('Pegawai');
+    }
+	
     public function addPegawai(Pegawai $pegawai){
         $result = 0;
         $link = PDOUtil::createConnection();

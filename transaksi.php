@@ -83,14 +83,6 @@
     <div class="row row-space">
         <div class="col-2">
             <div class="input-group">
-                <label class="label">Tanggal Exp</label>
-                <input class="input--style-4" type="text" name="txtTanggalExp" placeholder="Masukkan Tanggal Exp" required="">
-            </div>
-        </div>
-    </div>
-    <div class="row row-space">
-        <div class="col-2">
-            <div class="input-group">
                 <label class="label">Rating</label>
                 <input class="input--style-4" type="text" name="txtRating" placeholder="Masukkan Rating" required="">
             </div>

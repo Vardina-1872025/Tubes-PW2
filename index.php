@@ -111,7 +111,7 @@ if(!isset($_SESSION['isLoggedIn'])){
                         </button>
                         <div class="dropdown-content">
                         <a href="?navito=viewmember">Member</a>
-                        <a href="#">Employee Of The Month</a>
+                        <a href="?navito=month">Employee Of The Month</a>
                         </div>
                     </div>
                 <?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='member'){?>
@@ -188,6 +188,10 @@ if(!isset($_SESSION['isLoggedIn'])){
 				case 'viewpegawai':
                     $ownerController = new ownerController();
                     $ownerController->index();
+					break;
+				case 'month':
+                    $pegawaiController = new pegawaiController();
+                    $pegawaiController->indexM();
 					break;
                 default:
                     {
