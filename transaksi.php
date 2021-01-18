@@ -124,8 +124,7 @@
             echo '<td>' . $row3->getId_member() . '</td>';
             echo '<td>' . $row3->getTot_poin() . '</td>';
             if($_SESSION['isLoggedIn'] == TRUE) {
-            echo '<td><button class="btn btn--radius-2 btn--blue" onclick="updateMember(\''.$row3->getId_pegawai().'\')">Update</button>
-            <button class="btn btn--radius-2 btn--blue" onclick="deleteTransaksi(\''.$row3->getId_transaksi().'\')">Delete</button></td>';
+            echo '<td><button class="btn btn--radius-2 btn--blue" onclick="deleteTransaksi(\''.$row3->getId_transaksi().'\')">Delete</button></td>';
             }
             echo '</tr>';
         }
