@@ -7,12 +7,14 @@ class pegawaiController{
     private $ownerDao;
     private $pegawaiDao;
 
+
     public function __construct()
     {
         $this->transaksiDao = new TransaksiDaoImpl();
         $this->memberDao = new MemberDaoImpl();
         $this->ownerDao = new OwnerDaoImpl();
         $this->pegawaiDao = new PegawaiDaoImpl();
+    
     }
 
     public function index(){
@@ -77,5 +79,36 @@ class pegawaiController{
 		$date = date('Y-m-d');
 		$pegawai = $this->pegawaiDao->fetchPegawaiBulanan($date);
 		include_once './month.php';
-	}
+    }
+    
+    public function indexAddMem(){
+        //tambah
+		$submitPressed = filter_input(INPUT_POST,"btnSubmit");
+		if($submitPressed){
+            //Mengambil data
+            $idmember = filter_input(INPUT_POST, "txtIDMember");
+			$nama = filter_input(INPUT_POST,"txtNamaMember");
+			$email = filter_input(INPUT_POST,"txtEmailMember");
+			$telepon = filter_input(INPUT_POST,"txtNoTelpMember");
+            $pass = filter_input(INPUT_POST,"txtPasswordMember");
+            $md5pass = md5($pass);
+
+            $member = new member();
+		    $member->setId_member($idmember);
+            $member->setNama_member($nama);
+            $member->setEmail($email);
+            $member->setNo_telp($telepon);
+            $member->setPassword($md5pass);
+            
+			
+			$result = $this->memberDao->addMember($member);
+			if ($result){
+				echo '<div class="bg-success">Data successfully added (Member : '.$idmember.')</div>';
+			} else {
+				echo '<div class="bg-error">Error Add Data</div>';
+			}
+		}
+        $result = $this->memberDao->fetchMemberData();
+        include_once './data_member.php';
+    }
 }
