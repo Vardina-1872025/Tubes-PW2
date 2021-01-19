@@ -1,7 +1,15 @@
 # Tubes-PW2
-Password Member : 12345
-Password Owner : 12345
-Password Pegawai : P1234 (P nya harus besar)
+- Owner
+1872043 
+Pass : 12345
+
+- Pegawai
+1872045
+Pass : P1234
+
+- Member
+M0001
+Pass : 12345
 
 Nama anggota :
 Vardina Nava (1872025)
