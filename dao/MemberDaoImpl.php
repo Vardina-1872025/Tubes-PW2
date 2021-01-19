@@ -40,7 +40,7 @@ class MemberDaoImpl{
         PDOUtil::closeConnection($link);
         return $result;
     }
-
+	//Pembaharuan Projek
     public function addMember(Member $member){
         $result = 0;
         $link = PDOUtil::createConnection();
