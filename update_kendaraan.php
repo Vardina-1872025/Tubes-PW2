@@ -4,7 +4,7 @@
         <div class="col-2">
             <div class="input-group">
                 <label class="label">Plat Motor</label>
-                <input class="input--style-4" type="text" name="txtPlatMotor" value="<?php echo $kendaraan->getPlat_motor(); ?>" required="">
+                <input class="input--style-4" type="text" name="txtPlatMotor" value="<?php echo $kendaraan->getPlat_motor(); ?>" >
             </div>
         </div>
     </div>
@@ -12,7 +12,7 @@
         <div class="col-2">
             <div class="input-group">
                 <label class="label">Plat Mobil</label>
-                <input class="input--style-4" type="text" name="txtPlatMobil" value="<?php echo $kendaraan->getPlat_mobil(); ?>" required="">
+                <input class="input--style-4" type="text" name="txtPlatMobil" value="<?php echo $kendaraan->getPlat_mobil(); ?>" >
             </div>
         </div>
     </div>
