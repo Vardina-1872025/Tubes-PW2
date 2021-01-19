@@ -80,7 +80,7 @@ class pegawaiController{
 		$pegawai = $this->pegawaiDao->fetchPegawaiBulanan($date);
 		include_once './month.php';
     }
-    
+    //Pembaharuan Projek
     public function indexAddMem(){
         //tambah
 		$submitPressed = filter_input(INPUT_POST,"btnSubmit");
