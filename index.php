@@ -112,7 +112,9 @@ if(!isset($_SESSION['isLoggedIn'])){
                         <div class="dropdown-content">
                         <a href="?navito=viewmember">Member</a>
                         <a href="?navito=month">Employee Of The Month</a>
+                        <a href="?navito=datamember">Input Data Member</a>
                         </div>
+                        
                     </div>
                 <?php } else if($_SESSION['isLoggedIn'] && $_SESSION['session_role']=='member'){?>
 					<li><a href="?navito=kendaraan">Data Kendaraan</a></li>
@@ -152,6 +154,10 @@ if(!isset($_SESSION['isLoggedIn'])){
 				case 'laporan':
                     $ownerController = new ownerController();
                     $ownerController->indexL();
+                    break;
+                case 'datamember':
+                    $pegawaiController = new pegawaiController();
+                    $pegawaiController->indexAddMem();
                     break;
                 case 'kendaraan':
                     $memberController = new memberController();
